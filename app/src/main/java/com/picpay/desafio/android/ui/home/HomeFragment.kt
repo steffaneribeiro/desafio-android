@@ -9,13 +9,13 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.picpay.desafio.android.R
 import com.picpay.desafio.android.model.User
 import com.picpay.desafio.android.ui.adapterUser.UserListAdapter
 import com.picpay.desafio.android.util.BaseModelState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : Fragment() {
@@ -25,14 +25,12 @@ class HomeFragment : Fragment() {
 
     val adapter: UserListAdapter by lazy { UserListAdapter() }
 
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -47,7 +45,6 @@ class HomeFragment : Fragment() {
 
         setObservable()
         setAdapter()
-
     }
 
     private fun setObservable() {
