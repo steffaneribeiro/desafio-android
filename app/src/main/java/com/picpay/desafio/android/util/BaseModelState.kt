@@ -8,7 +8,7 @@ data class BaseModelState(val data: List<User>?, val status: STATUS, val error: 
     }
 
     companion object {
-        fun success(data: List<User>?) =
+        fun success(data: List<User>) =
             BaseModelState(
                 data,
                 STATUS.SUCCESS
