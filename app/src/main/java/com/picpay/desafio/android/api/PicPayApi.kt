@@ -4,11 +4,17 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.picpay.desafio.android.BuildConfig
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
+fun gson(): Gson {
+    return GsonBuilder().create()
+}
 
 fun cache(application: Application): Cache {
     val cacheSize = 10 * 1024 * 1024
@@ -41,11 +47,11 @@ private fun hasNetwork(context: Context): Boolean? {
     return isConnected
 }
 
-fun retrofit(okHttpClient: OkHttpClient): Retrofit {
+fun retrofit(okHttpClient: OkHttpClient, url: String = BuildConfig.BASE_URL): Retrofit {
     return Retrofit.Builder()
-        .baseUrl("http://careers.picpay.com/tests/mobdev/")
+        .baseUrl(url)
         .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+        .addConverterFactory(GsonConverterFactory.create(gson()))
         .build()
 }
 

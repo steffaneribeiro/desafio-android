@@ -28,10 +28,6 @@ class HomeViewModel(private val useCase: BaseRepository) : ViewModel() {
             } catch (e: Exception) {
                 _users.value = BaseModelState.error(e)
             }
-
-
         }
     }
-
-
 }
